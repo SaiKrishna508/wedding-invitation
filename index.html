@@ -77,9 +77,8 @@
     main { display: none; }
     body.is-open main { display: block; animation: page-reveal .9s both; }
     body.is-open .cover { display: none; }
-    .music-control { position: fixed; z-index: 50; top: 1rem; right: 1rem; display: inline-flex; align-items: center; gap: .55rem; border: 1px solid rgba(201,155,67,.5); border-radius: 99px; background: rgba(255,249,239,.94); color: var(--maroon); padding: .65rem .9rem; box-shadow: 0 4px 18px rgba(64,20,28,.12); cursor: pointer; backdrop-filter: blur(10px); font-size: .78rem; font-weight: 700; }
-    .music-control .music-icon { display: inline-grid; place-items: center; width: 1.35rem; height: 1.35rem; border-radius: 50%; background: #f3e4c2; }
-    .music-control.playing .music-icon { animation: pulse 1.3s ease-in-out infinite; }
+    #petal-burst { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 80; }
+    .burst-petal { position: absolute; top: -28px; width: 14px; height: 21px; border-radius: 100% 0 100% 0; background: linear-gradient(145deg, #ffe2d8, #c97680); opacity: 0; filter: drop-shadow(0 3px 4px rgba(54, 15, 27, .16)); animation: burst-fall var(--duration) var(--delay) ease-in forwards; }
     .paper-section { position: relative; padding: clamp(4rem, 9vw, 7.5rem) 1.25rem; overflow: hidden; }
     .paper-section.cream { background: var(--cream); }
     .paper-section.blush { background: #f5e7df; }
@@ -134,7 +133,7 @@
     @keyframes page-reveal { from { opacity: 0; } to { opacity: 1; } }
     @keyframes petal-fall { 0% { transform: translate3d(0,-8vh,0) rotate(0deg); opacity: 0; } 10% { opacity: .8; } 85% { opacity: .75; } 100% { transform: translate3d(70px,110vh,0) rotate(560deg); opacity: 0; } }
     @keyframes heart-beat { 0%, 100% { transform: scale(1); } 8% { transform: scale(1.12); } 16% { transform: scale(1); } 23% { transform: scale(1.06); } 30% { transform: scale(1); } }
-    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(201,155,67,.4); } 50% { box-shadow: 0 0 0 7px rgba(201,155,67,0); } }
+    @keyframes burst-fall { 0% { transform: translate3d(0,-4vh,0) rotate(0deg) scale(var(--scale)); opacity: 0; } 12% { opacity: .92; } 100% { transform: translate3d(var(--drift),110vh,0) rotate(var(--spin)) scale(var(--scale)); opacity: 0; } }
     @media (max-width: 640px) {
       .cover::before { inset: 10px; } .cover::after { inset: 16px; }
       .corner { width: 82px; height: 82px; } .corner.tl { top: 18px; left: 18px; } .corner.tr { top: 18px; right: 18px; } .corner.bl { bottom: 18px; left: 18px; } .corner.br { bottom: 18px; right: 18px; }
@@ -143,7 +142,6 @@
       .cover-mandap { width: min(265px, 70vw); margin-top: .15rem; }
       .cover-date { letter-spacing: .08em; font-size: .67rem; }
       .cover-date .line { width: 20px; }
-      .music-control { top: .65rem; right: .65rem; padding: .55rem .7rem; }
       .paper-section { padding: 4.3rem 1.1rem; }
       .names-lockup { gap: .35rem; }
       .names-lockup .name { font-size: clamp(2rem, 9vw, 3.15rem); }
@@ -156,7 +154,7 @@
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
-      .cover-petal { display: none; }
+      .cover-petal, .burst-petal { display: none; }
     }
   </style>
 </head>
@@ -215,10 +213,8 @@
     </div>
   </section>
 
-  <button class="music-control" id="music-toggle" type="button" aria-pressed="false" aria-label="Play wedding music">
-    <span class="music-icon" aria-hidden="true">♫</span><span id="music-label">Play our tune</span>
-  </button>
-  <audio id="wedding-audio" src="assets/original-wedding-tune.mpeg" loop preload="none"></audio>
+  <div id="petal-burst" aria-hidden="true"></div>
+  <audio id="wedding-audio" src="assets/original-wedding-tune.mpeg" autoplay loop preload="auto"></audio>
 
   <main id="invitation">
     <section class="paper-section cream intro" aria-labelledby="invite-title">
@@ -295,35 +291,35 @@
   <script>
     // Open the digital invitation and move focus to its content.
     const openButton = document.getElementById('open-invitation');
+    const audio = document.getElementById('wedding-audio');
+    const petalBurst = document.getElementById('petal-burst');
+    const startMusic = () => {
+      const playback = audio.play();
+      if (playback) playback.catch(() => {});
+    };
+    const showerPetals = () => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      for (let i = 0; i < 28; i += 1) {
+        const petal = document.createElement('span');
+        petal.className = 'burst-petal';
+        petal.style.left = `${Math.random() * 100}%`;
+        petal.style.setProperty('--duration', `${4.2 + Math.random() * 2}s`);
+        petal.style.setProperty('--delay', `${Math.random() * .45}s`);
+        petal.style.setProperty('--drift', `${Math.random() * 150 - 75}px`);
+        petal.style.setProperty('--spin', `${360 + Math.random() * 360}deg`);
+        petal.style.setProperty('--scale', `${.55 + Math.random() * .75}`);
+        petal.addEventListener('animationend', () => petal.remove(), { once: true });
+        petalBurst.appendChild(petal);
+      }
+    };
+    startMusic();
     openButton.addEventListener('click', () => {
+      startMusic();
+      showerPetals();
       document.body.classList.add('is-open');
       document.getElementById('invitation').setAttribute('tabindex', '-1');
       document.getElementById('invitation').focus({ preventScroll: true });
       window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-    });
-
-    // The music is opt-in because browsers commonly block sound until a user gesture.
-    const audio = document.getElementById('wedding-audio');
-    const musicToggle = document.getElementById('music-toggle');
-    const musicLabel = document.getElementById('music-label');
-    musicToggle.addEventListener('click', async () => {
-      if (audio.paused) {
-        try {
-          await audio.play();
-          musicToggle.classList.add('playing');
-          musicToggle.setAttribute('aria-pressed', 'true');
-          musicToggle.setAttribute('aria-label', 'Pause wedding music');
-          musicLabel.textContent = 'Pause music';
-        } catch (error) {
-          musicLabel.textContent = 'Tap to play';
-        }
-      } else {
-        audio.pause();
-        musicToggle.classList.remove('playing');
-        musicToggle.setAttribute('aria-pressed', 'false');
-        musicToggle.setAttribute('aria-label', 'Play wedding music');
-        musicLabel.textContent = 'Play our tune';
-      }
     });
 
     // Countdown to the wedding muhurtham at 8:49 PM in India (+05:30).

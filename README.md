@@ -1,6 +1,6 @@
 # Sai Krishna & Asha Latha — Digital Wedding Invitation
 
-A lightweight, mobile-friendly English-only Indian wedding invitation built with plain HTML, CSS and JavaScript. It includes an animated mandap illustration, falling petals, a royal maroon/gold floral palette, a countdown, and wedding music that plays only after the visitor taps the music button.
+A lightweight, mobile-friendly English-only Indian wedding invitation built with plain HTML, CSS and JavaScript. It includes an animated mandap illustration, falling petals, a royal maroon/gold floral palette, a countdown, and wedding music that attempts to autoplay.
 
 **Wedding date:** Sunday, 22 November 2026. **Muhurtham:** 8:49 PM (India time).
 **Venue:** Mangalya Convention Hall, Opposite SBI, Gaigolapadu Junction, Andhra Pradesh 533005.
@@ -9,7 +9,7 @@ A lightweight, mobile-friendly English-only Indian wedding invitation built with
 
 1. Unzip the project (if you downloaded the ZIP).
 2. Open `index.html` in Chrome, Edge, Safari or Firefox. Most features work directly from the file system.
-3. Test the “Open our invitation” button and music button. Keep `assets/original-wedding-tune.mpeg` alongside `index.html` so the music loads.
+3. Test the “Open our invitation” button and its petal shower. Keep `assets/original-wedding-tune.mpeg` alongside `index.html` so the music loads.
 
 ## Before publishing — optional personalization
 
@@ -31,7 +31,7 @@ GitHub Pages serves static files, so no Node.js build step or backend server is 
 
 ## Notes
 
-- Audio does **not** autoplay. Visitors must tap “Play our tune”; this is expected browser behavior and avoids surprising people with sound.
+- Audio attempts to autoplay when the page opens and starts again when visitors tap “Open our invitation.” Browsers may block sound until that interaction.
 - The included tune is an original, programmatically synthesized, gentle pentatonic instrumental-style loop, not a recording of traditional instruments. It is included locally in `assets/` and does not depend on a third-party music stream.
 - The page has no analytics, tracking pixels, server-side code or RSVP data collection.
 - Use the reduced-motion system preference to reduce animations for visitors who request it.
