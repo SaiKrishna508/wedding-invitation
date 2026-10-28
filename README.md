@@ -1,19 +1,19 @@
 # Sai Krishna & Asha Latha — Digital Wedding Invitation
 
-A lightweight, mobile-friendly Indian wedding invitation built with plain HTML, CSS and JavaScript. It includes an animated mandap illustration, falling petals, a royal maroon/gold floral palette, an English/Telugu toggle, a countdown, and an original synthesized instrumental-style loop that plays only after the visitor taps the music button.
+A lightweight, mobile-friendly English-only Indian wedding invitation built with plain HTML, CSS and JavaScript. It includes an animated mandap illustration, falling petals, a royal maroon/gold floral palette, a countdown, and wedding music that plays only after the visitor taps the music button.
 
-**Wedding date:** Sunday, 22 November 2026. Guests are welcome from 6:00 PM, with the muhurtham at 8:49 PM (India time).
+**Wedding date:** Sunday, 22 November 2026. **Muhurtham:** 8:49 PM (India time).
 **Venue:** Mangalya Convention Hall, Opposite SBI, Gaigolapadu Junction, Andhra Pradesh 533005.
 
 ## Preview locally
 
 1. Unzip the project (if you downloaded the ZIP).
 2. Open `index.html` in Chrome, Edge, Safari or Firefox. Most features work directly from the file system.
-3. Test the “Open our invitation” button, Telugu toggle and music button. Keep `assets/original-wedding-tune.mpeg` alongside `index.html` so the music loads.
+3. Test the “Open our invitation” button and music button. Keep `assets/original-wedding-tune.mpeg` alongside `index.html` so the music loads.
 
 ## Before publishing — optional personalization
 
-The confirmed ceremony time, venue, address and map link are already included. The countdown targets the muhurtham at 8:49 PM in India. You can still add parents' names, an RSVP/WhatsApp contact, reception details or a dress code if desired. Family name fields remain optional placeholders.
+The muhurtham time, venue, address and map link are already included. The countdown targets the muhurtham at 8:49 PM in India.
 
 The cover currently uses “Sai Krishna” and “Asha Latha”; the browser page title and metadata use “Sai Krishna Satya Kumar” and “Asha Latha.” Change any wording you want to use consistently.
 
