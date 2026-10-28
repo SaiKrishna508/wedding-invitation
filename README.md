@@ -9,7 +9,7 @@ A lightweight, mobile-friendly Indian wedding invitation built with plain HTML, 
 
 1. Unzip the project (if you downloaded the ZIP).
 2. Open `index.html` in Chrome, Edge, Safari or Firefox. Most features work directly from the file system.
-3. Test the “Open our invitation” button, Telugu toggle and music button. Keep `assets/original-wedding-tune.wav` alongside `index.html` so the music loads.
+3. Test the “Open our invitation” button, Telugu toggle and music button. Keep `assets/original-wedding-tune.mpeg` alongside `index.html` so the music loads.
 
 ## Before publishing — optional personalization
 
@@ -40,5 +40,5 @@ GitHub Pages serves static files, so no Node.js build step or backend server is 
 ## Files
 
 - `index.html` — complete site and styling.
-- `assets/original-wedding-tune.wav` — original synthesized music loop.
+- `assets/original-wedding-tune.mpeg` — wedding music.
 - `.nojekyll` — asks GitHub Pages not to run Jekyll processing.
