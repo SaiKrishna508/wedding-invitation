@@ -1,6 +1,6 @@
 # Sai Krishna & Asha Latha — Digital Wedding Invitation
 
-A lightweight, mobile-friendly English-only Indian wedding invitation built with plain HTML, CSS and JavaScript. It includes an animated mandap illustration, falling petals, a royal maroon/gold floral palette, a countdown, and wedding music that attempts to autoplay.
+A lightweight, mobile-friendly English-only Indian wedding invitation built with plain HTML, CSS and JavaScript. It includes an animated mandap illustration, falling petals, a royal maroon/gold floral palette, a countdown, wedding music that attempts to autoplay, and social-sharing preview metadata with a custom thumbnail.
 
 **Wedding date:** Sunday, 22 November 2026. **Muhurtham:** 8:49 PM (India time).
 **Venue:** Mangalya Convention Hall, Opposite SBI, Gaigolapadu Junction, Andhra Pradesh 533005.
@@ -41,4 +41,5 @@ GitHub Pages serves static files, so no Node.js build step or backend server is 
 
 - `index.html` — complete site and styling.
 - `assets/original-wedding-tune.mpeg` — wedding music.
+- `assets/wedding-invitation-preview.png` — social link thumbnail.
 - `.nojekyll` — asks GitHub Pages not to run Jekyll processing.
