@@ -88,6 +88,9 @@
     body.is-open .cover { display: none; }
     #petal-burst { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 80; }
     .burst-petal { position: absolute; top: -28px; width: 14px; height: 21px; border-radius: 100% 0 100% 0; background: linear-gradient(145deg, #ffe2d8, #c97680); opacity: 0; filter: drop-shadow(0 3px 4px rgba(54, 15, 27, .16)); animation: burst-fall var(--duration) var(--delay) ease-in forwards; }
+    #ambient-petals { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 10; opacity: 0; transition: opacity 1.2s ease; }
+    #ambient-petals.is-active { opacity: 1; }
+    .ambient-petal { position: absolute; top: -30px; width: 11px; height: 17px; border-radius: 100% 0 100% 0; background: linear-gradient(145deg, #ffe1d7, #cf8790); opacity: 0; filter: drop-shadow(0 2px 3px rgba(54, 15, 27, .12)); animation: ambient-fall var(--duration) var(--delay) linear infinite; }
     .paper-section { position: relative; padding: clamp(4rem, 9vw, 7.5rem) 1.25rem; overflow: hidden; }
     .paper-section.cream { background: var(--cream); }
     .paper-section.blush { background: #f5e7df; }
@@ -143,6 +146,7 @@
     @keyframes petal-fall { 0% { transform: translate3d(0,-8vh,0) rotate(0deg); opacity: 0; } 10% { opacity: .8; } 85% { opacity: .75; } 100% { transform: translate3d(70px,110vh,0) rotate(560deg); opacity: 0; } }
     @keyframes heart-beat { 0%, 100% { transform: scale(1); } 8% { transform: scale(1.12); } 16% { transform: scale(1); } 23% { transform: scale(1.06); } 30% { transform: scale(1); } }
     @keyframes burst-fall { 0% { transform: translate3d(0,-4vh,0) rotate(0deg) scale(var(--scale)); opacity: 0; } 12% { opacity: .92; } 100% { transform: translate3d(var(--drift),110vh,0) rotate(var(--spin)) scale(var(--scale)); opacity: 0; } }
+    @keyframes ambient-fall { 0% { transform: translate3d(0,-4vh,0) rotate(0deg) scale(var(--scale)); opacity: 0; } 12% { opacity: .48; } 85% { opacity: .4; } 100% { transform: translate3d(var(--drift),110vh,0) rotate(var(--spin)) scale(var(--scale)); opacity: 0; } }
     @media (max-width: 640px) {
       .cover::before { inset: 10px; } .cover::after { inset: 16px; }
       .corner { width: 82px; height: 82px; } .corner.tl { top: 18px; left: 18px; } .corner.tr { top: 18px; right: 18px; } .corner.bl { bottom: 18px; left: 18px; } .corner.br { bottom: 18px; right: 18px; }
@@ -163,7 +167,7 @@
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
-      .cover-petal, .burst-petal { display: none; }
+      .cover-petal, .burst-petal, .ambient-petal { display: none; }
     }
   </style>
 </head>
@@ -223,6 +227,7 @@
   </section>
 
   <div id="petal-burst" aria-hidden="true"></div>
+  <div id="ambient-petals" aria-hidden="true"></div>
   <audio id="wedding-audio" src="assets/original-wedding-tune.mpeg" autoplay loop preload="auto"></audio>
 
   <main id="invitation">
@@ -302,6 +307,7 @@
     const openButton = document.getElementById('open-invitation');
     const audio = document.getElementById('wedding-audio');
     const petalBurst = document.getElementById('petal-burst');
+    const ambientPetals = document.getElementById('ambient-petals');
     const startMusic = () => {
       const playback = audio.play();
       if (playback) playback.catch(() => {});
@@ -321,10 +327,26 @@
         petalBurst.appendChild(petal);
       }
     };
+    const startAmbientPetals = () => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      for (let i = 0; i < 7; i += 1) {
+        const petal = document.createElement('span');
+        petal.className = 'ambient-petal';
+        petal.style.left = `${Math.random() * 100}%`;
+        petal.style.setProperty('--duration', `${13 + Math.random() * 5}s`);
+        petal.style.setProperty('--delay', `${Math.random() * 7}s`);
+        petal.style.setProperty('--drift', `${Math.random() * 100 - 50}px`);
+        petal.style.setProperty('--spin', `${240 + Math.random() * 360}deg`);
+        petal.style.setProperty('--scale', `${.55 + Math.random() * .65}`);
+        ambientPetals.appendChild(petal);
+      }
+      ambientPetals.classList.add('is-active');
+    };
     startMusic();
     openButton.addEventListener('click', () => {
       startMusic();
       showerPetals();
+      window.setTimeout(startAmbientPetals, 6700);
       document.body.classList.add('is-open');
       document.getElementById('invitation').setAttribute('tabindex', '-1');
       document.getElementById('invitation').focus({ preventScroll: true });
