@@ -74,6 +74,7 @@
     .cover-date .line { display: block; width: 35px; height: 1px; background: #c89c50; }
     .gold-button, .outline-button { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; min-height: 48px; border-radius: 999px; padding: .9rem 1.55rem; text-decoration: none; border: 1px solid transparent; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
     .gold-button { background: linear-gradient(135deg, #f3dda8, #d9ae5e); color: #4e1821; box-shadow: 0 10px 28px rgba(15, 0, 0, .18); font-weight: 800; letter-spacing: .025em; }
+    #open-invitation { animation: invitation-bounce 2.8s ease-in-out infinite; }
     .gold-button:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(15, 0, 0, .28); }
     .cover-note { margin-top: 1.1rem; font-size: .72rem; color: #e3cdb4; letter-spacing: .04em; }
     .cover-petal { width: 13px; height: 20px; position: absolute; top: -30px; background: linear-gradient(145deg, #ffdbd4, #c97680); border-radius: 100% 0 100% 0; opacity: .82; animation: petal-fall 9s linear infinite; z-index: 1; }
@@ -143,6 +144,7 @@
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
     @keyframes rise-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes page-reveal { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes invitation-bounce { 0%, 72%, 100% { transform: translateY(0); } 78% { transform: translateY(-5px); } 84% { transform: translateY(0); } 90% { transform: translateY(-2px); } 96% { transform: translateY(0); } }
     @keyframes petal-fall { 0% { transform: translate3d(0,-8vh,0) rotate(0deg); opacity: 0; } 10% { opacity: .8; } 85% { opacity: .75; } 100% { transform: translate3d(70px,110vh,0) rotate(560deg); opacity: 0; } }
     @keyframes heart-beat { 0%, 100% { transform: scale(1); } 8% { transform: scale(1.12); } 16% { transform: scale(1); } 23% { transform: scale(1.06); } 30% { transform: scale(1); } }
     @keyframes burst-fall { 0% { transform: translate3d(0,-4vh,0) rotate(0deg) scale(var(--scale)); opacity: 0; } 12% { opacity: .92; } 100% { transform: translate3d(var(--drift),110vh,0) rotate(var(--spin)) scale(var(--scale)); opacity: 0; } }
@@ -221,7 +223,7 @@
       <div class="amp serif">&amp;</div>
       <h1 class="serif">Asha Latha</h1>
       <div class="cover-date"><span class="line"></span><span>Sunday · 22 November 2026</span><span class="line"></span></div>
-      <button class="gold-button" id="open-invitation" type="button"><span aria-hidden="true">✧</span> Open our invitation <span aria-hidden="true">✧</span></button>
+      <button class="gold-button" id="open-invitation" type="button"><span aria-hidden="true">✧</span> Let’s celebrate <span aria-hidden="true">✧</span></button>
       <div class="cover-note">A little celebration of love, family &amp; forever</div>
     </div>
   </section>
