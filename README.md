@@ -9,7 +9,7 @@ A lightweight, mobile-friendly English-only Indian wedding invitation built with
 
 1. Unzip the project (if you downloaded the ZIP).
 2. Open `index.html` in Chrome, Edge, Safari or Firefox. Most features work directly from the file system.
-3. Test the “Open our invitation” button and its petal shower. Keep `assets/original-wedding-tune.mpeg` alongside `index.html` so the music loads.
+3. Test the “Let’s celebrate” button and its petal shower. Keep `assets/original-wedding-tune.mp3` alongside `index.html` so the music loads.
 
 ## Before publishing — optional personalization
 
@@ -31,7 +31,7 @@ GitHub Pages serves static files, so no Node.js build step or backend server is 
 
 ## Notes
 
-- Audio attempts to autoplay when the page opens and starts again when visitors tap “Open our invitation.” Browsers may block sound until that interaction.
+- Audio attempts to autoplay when the page opens and starts again when visitors tap “Let’s celebrate.” Browsers may block sound until that interaction.
 - The included tune is an original, programmatically synthesized, gentle pentatonic instrumental-style loop, not a recording of traditional instruments. It is included locally in `assets/` and does not depend on a third-party music stream.
 - The page has no analytics, tracking pixels, server-side code or RSVP data collection.
 - Use the reduced-motion system preference to reduce animations for visitors who request it.
@@ -40,6 +40,6 @@ GitHub Pages serves static files, so no Node.js build step or backend server is 
 ## Files
 
 - `index.html` — complete site and styling.
-- `assets/original-wedding-tune.mpeg` — wedding music.
+- `assets/original-wedding-tune.mp3` — wedding music.
 - `assets/wedding-invitation-preview.png` — social link thumbnail.
 - `.nojekyll` — asks GitHub Pages not to run Jekyll processing.
